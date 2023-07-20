@@ -1,24 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import PaymentForm from "./components/PaymentForm/PaymentForm";
+import Expenses from "./components/Payments/Expenses";
 
 function App() {
+  const [expenses, setExpenses] = useState([
+    {
+      id: "e1",
+      title: "수건",
+      amount: 12.33,
+      date: new Date(2025, 8, 14),
+    },
+  ]);
+
+  const getPaymentFormData = (data) => {
+    console.log(data);
+    console.log(...expenses);
+    setExpenses([
+      {
+        id: Math.random().toString(),
+        title: data.name,
+        amount: data.price,
+        date: new Date(data.today),
+      },
+      ...expenses,
+    ]);
+  };
+
+  const deleteExpenseItem = (id) => {
+    // use filter
+    const newFilteredArray = expenses.filter((item) => item.id !== id);
+    setExpenses(newFilteredArray);
+    // use slice : id값이 아닌 index값 필요
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <PaymentForm getPaymentFormData={getPaymentFormData} />
+      <Expenses items={expenses} deleteExpenseItem={deleteExpenseItem} />
+    </>
   );
 }
 
