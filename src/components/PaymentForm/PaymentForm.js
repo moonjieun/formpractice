@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import "./PaymentForm.css";
+import styles from "./PaymentForm.module.css";
 
 const PaymentForm = ({ getPaymentFormData }) => {
   const [objectState, setObjectState] = useState({
@@ -45,10 +45,14 @@ const PaymentForm = ({ getPaymentFormData }) => {
   };
   console.log("여기 폼", objectState.name);
   return (
-    <div className="new-payment">
+    <div className={styles.newPayment}>
       <form onSubmit={buttonSubmitHander}>
-        <div className="new-payment__controls">
-          <div className="new-payment__control">
+        <div className={styles.newPaymentControls}>
+          <div
+            className={`${styles.newPaymentControl} ${
+              objectState.name === "" && styles.isTrue
+            }`}
+          >
             <label>이름</label>
             <input
               type="text"
@@ -56,7 +60,7 @@ const PaymentForm = ({ getPaymentFormData }) => {
               value={objectState.name}
             />
           </div>
-          <div className="new-payment__control">
+          <div className={styles.newPaymentControl}>
             <label>금액</label>
             <input
               type="number"
@@ -66,7 +70,7 @@ const PaymentForm = ({ getPaymentFormData }) => {
               value={objectState.price}
             />
           </div>
-          <div className="new-payment__control">
+          <div className={styles.newPaymentControl}>
             <label>날짜</label>
             <input
               type="date"
@@ -77,7 +81,7 @@ const PaymentForm = ({ getPaymentFormData }) => {
             />
           </div>
         </div>
-        <div className="new-payment__actions">
+        <div className={styles.newPaymentControlActions}>
           <button type="submit">결제 추가</button>
         </div>
       </form>
