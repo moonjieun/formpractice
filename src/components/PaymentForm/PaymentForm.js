@@ -32,15 +32,18 @@ const PaymentForm = ({ getPaymentFormData }) => {
 
   const buttonSubmitHander = (event) => {
     event.preventDefault();
+
     getPaymentFormData(objectState);
+    // console.log(objectState);
 
     setObjectState({
+      //폼 데이터 보내고 값 비어주기 위함
       name: "",
       price: 0,
       today: new Date(),
     });
   };
-
+  console.log("여기 폼", objectState.name);
   return (
     <div className="new-payment">
       <form onSubmit={buttonSubmitHander}>
@@ -57,8 +60,8 @@ const PaymentForm = ({ getPaymentFormData }) => {
             <label>금액</label>
             <input
               type="number"
-              min="0.01"
-              step="0.01"
+              min="1"
+              step="1"
               onChange={inputPriceHandler}
               value={objectState.price}
             />

@@ -8,36 +8,52 @@ function App() {
     {
       id: "e1",
       title: "수건",
-      amount: 12.33,
-      date: new Date(2025, 8, 14),
+      amount: 12,
+      date: new Date(2022, 3, 14),
+    },
+    {
+      id: "e2",
+      title: "물티슈",
+      amount: 23,
+      date: new Date(2023, 8, 22),
+    },
+    {
+      id: "e3",
+      title: "모니터",
+      amount: 33,
+      date: new Date(2021, 10, 22),
+    },
+    {
+      id: "e4",
+      title: "의자",
+      amount: 29,
+      date: new Date(2022, 1, 31),
+    },
+    {
+      id: "e4",
+      title: "의자",
+      amount: 8,
+      date: new Date(2021, 6, 1),
     },
   ]);
 
   const getPaymentFormData = (data) => {
     console.log(data);
-    console.log(...expenses);
     setExpenses([
       {
         id: Math.random().toString(),
         title: data.name,
-        amount: data.price,
+        amount: Number(data.price),
         date: new Date(data.today),
       },
       ...expenses,
     ]);
   };
 
-  const deleteExpenseItem = (id) => {
-    // use filter
-    const newFilteredArray = expenses.filter((item) => item.id !== id);
-    setExpenses(newFilteredArray);
-    // use slice : id값이 아닌 index값 필요
-  };
-
   return (
     <>
       <PaymentForm getPaymentFormData={getPaymentFormData} />
-      <Expenses items={expenses} deleteExpenseItem={deleteExpenseItem} />
+      <Expenses items={expenses} />
     </>
   );
 }
